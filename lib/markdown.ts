@@ -1,11 +1,9 @@
 import { marked } from 'marked';
 import DDMPurify from 'isomorphic-dompurify';
 
-(marked as any).setOptions({
+marked.setOptions({
     gfm: true,
     breaks: true,
-    headerIds: true,
-    mangle: false,
 });
 
 export function renderMarkdown(md: string): string {
