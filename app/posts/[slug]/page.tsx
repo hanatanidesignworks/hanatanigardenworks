@@ -71,11 +71,11 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
     return (
     <>
     <Header />
-    <main className="px-4 pb-16 flex-1">
+    <main className="pb-16 flex-1">
       {/* ヒーロー（カバー画像 + タイトル） */}
-      <section className="relative w-full overflow-hidden">
+      <section className="relative w-full overflow-hidden flex justify-center">
         {/* 背景 */}
-        <div className="relative h-36 md:h-30">
+        <div className="relative h-36 md:h-30 w-[375px] md:w-[768px]">
           {post.cover_url ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -90,7 +90,7 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
           <div className="absolute inset-0 bg-black/40" />
           {/* タイトル */}
           <div className="absolute bottom-0 w-full p-6 md:p-8">
-            <h1 className="text-xl md:text-3xl font-bold tracking-tight text-white drop-shadow">
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white drop-shadow">
               {post.title}
             </h1>
             <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-zinc-200/90">
@@ -111,7 +111,7 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
       </section>
 
       {/* 本文 */}
-      <article className="mx-auto mt-10 max-w-3xl">
+      <article className="mx-auto mt-10 max-w-3xl px-4">
         <div
           className="prose prose-zinc max-w-none leading-relaxed md:prose-lg prose-headings:font-semibold prose-a:underline hover:prose-a:opacity-80"
           dangerouslySetInnerHTML={{ __html: html }}
@@ -119,7 +119,7 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
       </article>
 
       {/* フッター導線 */}
-      <div className="mx-auto mt-10 flex max-w-3xl items-center justify-between">
+      <div className="mx-auto mt-10 flex max-w-3xl items-center justify-between px-4">
         <Link
           href="/"
           className="group inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition
