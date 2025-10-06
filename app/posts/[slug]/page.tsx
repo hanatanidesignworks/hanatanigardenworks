@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { notFound } from 'next/navigation';
 import { renderMarkdown } from '@/lib/markdown';
 import Link from 'next/link';
+import Header from '@/components/Header';
 
 type Article = {
   id: number;
@@ -65,6 +66,8 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
     const html = renderMarkdown(post.content_md);
 
     return (
+    <>
+    <Header />
     <main className="px-4 pb-16">
       {/* ヒーロー（カバー画像 + タイトル） */}
       <section className="relative w-full overflow-hidden">
@@ -127,5 +130,6 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
         <div className="text-xs text-zinc-500">更新: {new Date(post.updated_at).toLocaleDateString('ja-JP')}</div>
       </div>
     </main>
+    </>
   );
 }
