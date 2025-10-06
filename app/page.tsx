@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import FirstView from '@/components/Firstview';
 import Hero from '@/components/Hero';
 import { supabase } from '@/lib/supabaseClient';
+import Footer from '@/components/Footer';
 
 export default async function Home() {
   const { data: posts, error} = await supabase
@@ -18,6 +19,7 @@ export default async function Home() {
       <Header />
       <FirstView />
       <Hero posts={posts ?? []} />
+      <Footer />
     </main>
   );
 }

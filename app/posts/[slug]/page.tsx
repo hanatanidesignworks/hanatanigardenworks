@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { renderMarkdown } from '@/lib/markdown';
 import Link from 'next/link';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 type Article = {
   id: number;
@@ -27,16 +28,18 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params, }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params;
-    const { data } = await supabase
+    const { slug: raw } = await params;
+    const slug = decodeURIComponent(raw).normalize('NFC');
+
+    const { data, error } = await supabase
     .from('articles')
     .select('title, excerpt')
     .eq('slug', slug)
     .eq('published', true)
-    .single();
+    .maybeSingle();
     return {
         title: data?.title ?? '記事',
-        description: data?.excerpt ?? 'ブログ記事',
+        description: data?.excerpt?.trim() ?? 'ブログ記事',
     };
 }
 
@@ -68,7 +71,7 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
     return (
     <>
     <Header />
-    <main className="px-4 pb-16">
+    <main className="px-4 pb-16 flex-1">
       {/* ヒーロー（カバー画像 + タイトル） */}
       <section className="relative w-full overflow-hidden">
         {/* 背景 */}
@@ -130,6 +133,7 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
         <div className="text-xs text-zinc-500">更新: {new Date(post.updated_at).toLocaleDateString('ja-JP')}</div>
       </div>
     </main>
+    <Footer />
     </>
   );
 }
