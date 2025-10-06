@@ -84,7 +84,7 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
           <div className="absolute inset-0 bg-black/40" />
           {/* タイトル */}
           <div className="absolute bottom-0 w-full p-6 md:p-8">
-            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-white drop-shadow">
+            <h1 className="text-xl md:text-3xl font-bold tracking-tight text-white drop-shadow">
               {post.title}
             </h1>
             <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-zinc-200/90">
