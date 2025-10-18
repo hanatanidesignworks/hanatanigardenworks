@@ -98,12 +98,13 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
                 {date}
               </time>*/}
               {post.tags?.slice(0, 4).map((t) => (
-                <span
+                <Link
                   key={t}
-                  className="rounded-full bg-white/15 px-3 py-1 backdrop-blur"
+                  href={`/tags/${encodeURIComponent(t)}`}
+                  className="rounded-full bg-white/15 px-3 py-1 backdrop-blur hover:bg-white/25 transition"
                 >
                   #{t}
-                </span>
+                </Link>
               ))}
             </div>
           </div>
