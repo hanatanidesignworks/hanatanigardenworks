@@ -37,7 +37,7 @@ export default async function TagPage({ params }: { params: Promise<{ tag: strin
                         key={a.id}
                         className='rounded-xl shadow p-4 bg-white hover:-translate-y-[2px] transition'
                     >
-                        <Link href={`/articles/${a.slug}`}>
+                        <Link href={`/posts/${a.slug}`}>
                             {a.cover_url && (
                                 <img
                                     src={a.cover_url}
