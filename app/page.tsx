@@ -3,6 +3,7 @@ import FirstView from '@/components/Firstview';
 import Hero from '@/components/Hero';
 import { supabase } from '@/lib/supabaseClient';
 import Footer from '@/components/Footer';
+import ContactForm from '@/components/ContactForm';
 
 export const revalidate = 30;
 
@@ -22,6 +23,7 @@ export default async function Home() {
       <Header />
       <FirstView />
       <Hero posts={posts ?? []} />
+      <ContactForm />
       <Footer />
     </main>
   );
