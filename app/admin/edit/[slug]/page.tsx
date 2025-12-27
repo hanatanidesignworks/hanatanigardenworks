@@ -25,6 +25,7 @@ export default function EditPage() {
     const [loadingGate, setLoadingGate] = useState(true);
     const [loadingDoc, setLoadingDoc] = useState(true);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const [articleId, setArticleId] = useState<string | null>(null);
 
     const [form, setForm] = useState<Editable>({
         title: '',
@@ -53,9 +54,16 @@ export default function EditPage() {
             setLoadingDoc(true);
             const { data, error } = await supabase
                 .from('articles')
-                .select('title, slug, excerpt, cover_url, tags, content_md, published')
+                .select('id, title, slug, excerpt, cover_url, tags, content_md, published')
                 .eq('slug', slug)
                 .maybeSingle();
+
+            if(!data) {
+                setErrorMsg('記事が見つかりませんでした');
+                return;
+            }
+
+            setArticleId(data.id);
 
             if (error || !data) {
                 setErrorMsg('記事が見つかりませんでした。');
@@ -88,8 +96,8 @@ export default function EditPage() {
                 content_md: form.content_md,
                 published: form.published,
             })
-            .eq('slug', slug)
-            .select('slug')
+            .eq('id', articleId)
+            .select('id')
             .maybeSingle();
 
         if (error) {
