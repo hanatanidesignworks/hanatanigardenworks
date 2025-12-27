@@ -78,7 +78,7 @@ export default function EditPage() {
         e.preventDefault();
         setErrorMsg(null);
 
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from('articles')
             .update({
                 title: form.title,
@@ -88,10 +88,16 @@ export default function EditPage() {
                 content_md: form.content_md,
                 published: form.published,
             })
-            .eq('slug', slug);
+            .eq('slug', slug)
+            .select('slug')
+            .maybeSingle();
 
         if (error) {
             setErrorMsg(error.message);
+            return;
+        }
+        if (!data) {
+            setErrorMsg('更新対象が0件でした（slug不一致 or 権限/RLSの可能性）');
             return;
         }
 
