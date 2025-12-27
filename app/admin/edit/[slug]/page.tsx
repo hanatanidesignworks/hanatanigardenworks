@@ -100,8 +100,7 @@ export default function EditPage() {
                 published: form.published,
             })
             .eq('id', articleId)
-            .select('id')
-            .maybeSingle();
+            .select('id');
 
         if (error) {
             setErrorMsg(error.message);
