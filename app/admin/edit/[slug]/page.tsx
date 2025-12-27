@@ -63,6 +63,9 @@ export default function EditPage() {
                 return;
             }
 
+            console.log('fetched article:', data);
+            console.log('fetched id:', data.id);
+
             setArticleId(data.id);
 
             if (error || !data) {
