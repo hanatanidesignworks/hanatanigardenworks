@@ -72,9 +72,9 @@ export default function ContactForm(){
     return (
         <form
             onSubmit={handleSubmit}
-            className='max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-4'
+            className='mt-10 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-4'
         >
-            <h2 className='text-xl font-bold text-gray-800 text-center'>お問い合わせフォーム</h2>
+            <h2 className='text-medium font-bold text-gray-700 text-center'>お問い合わせフォーム</h2>
 
             <div>
                 <label className='block mb-1 font-medium text-gray-700'>お名前</label>
