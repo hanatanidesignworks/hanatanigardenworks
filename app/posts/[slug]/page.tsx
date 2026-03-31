@@ -33,13 +33,43 @@ export async function generateMetadata({ params, }: { params: Promise<{ slug: st
 
     const { data, error } = await supabase
     .from('articles')
-    .select('title, excerpt')
+    .select('title, excerpt, cover_url')
     .eq('slug', slug)
     .eq('published', true)
     .maybeSingle();
+
+    const siteUrl = 'https://www.hanatanigardenworks.com';
+    const postUrl = `${siteUrl}/posts/${encodeURIComponent(slug)}`;
+    const imageUrl = data?.cover_url
+      ? new URL(data.cover_url, siteUrl).toString()
+      : undefined;
+
     return {
         title: data?.title ?? '記事',
         description: data?.excerpt?.trim() ?? 'ブログ記事',
+        openGraph: {
+            title: data?.title ?? '記事',
+            description: data?.excerpt?.trim() ?? 'ブログ記事',
+            url: postUrl,
+            type: 'article',
+            images: imageUrl
+              ? [
+                  {
+                    url: imageUrl,
+                    alt: data?.title ?? '記事のカバー画像',
+                  },
+                ]
+              : undefined,
+        },
+        twitter: {
+            card: imageUrl ? 'summary_large_image' : 'summary',
+            title: data?.title ?? '記事',
+            description: data?.excerpt?.trim() ?? 'ブログ記事',
+            images: imageUrl ? [imageUrl] : undefined,
+        },
+        alternates: {
+            canonical: postUrl,
+        },
     };
 }
 
