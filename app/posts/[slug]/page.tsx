@@ -56,6 +56,8 @@ export async function generateMetadata({ params, }: { params: Promise<{ slug: st
               ? [
                   {
                     url: imageUrl,
+                    width: 1200,
+                    height: 630,
                     alt: data?.title ?? '記事のカバー画像',
                   },
                 ]
