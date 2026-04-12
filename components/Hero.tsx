@@ -10,6 +10,7 @@ type ArticleCard = {
   cover_url: string | null;
   tags: string[] | null;
   created_at: string;
+  post_type?: string;
 };
 
 

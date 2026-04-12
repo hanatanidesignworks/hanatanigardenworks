@@ -13,6 +13,7 @@ export async function GET() {
         .from('articles')
         .select('title, slug, excerpt, content_md, created_at')
         .eq('published', true)
+        .eq('post_type', 'blog')
         .order('created_at', { ascending: false })
         .limit(20)
 
@@ -51,7 +52,7 @@ export async function GET() {
         <description>個人宅専門・独立5カ月目の庭師による営業と実践の記録</description>
         <language>ja</language>
         <lastBuildDate>${now}</lastBuildDate>
-        <atom:link href="${feedUrl}" rel="self" type="application/rss.xml" />
+        <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />
         ${items}
     </channel>
 </rss>`

@@ -28,6 +28,8 @@ export default function NewPostPage() {
     const [coverUrl, setCoverUrl] = useState('');
     const [tagsText, setTagsText] = useState('');
     const [published, setPublished] = useState(true);
+    const [postType, setPostType] = useState<'blog' | 'page'>('blog');
+    const [displayOrder, setDisplayOrder] = useState(0);
 
     const [slugTouched, setSlugTouched] = useState(false);
 
@@ -108,6 +110,8 @@ export default function NewPostPage() {
                     cover_url: coverUrl || null,
                     tags,
                     published,
+                    post_type: postType,
+                    display_order: postType === 'page' ? displayOrder : 0,
                 },
             ]);
 
@@ -244,6 +248,31 @@ export default function NewPostPage() {
                             placeholder="庭師, Next.js, 起業"
                         />
                     </div>
+
+                    <div>
+                        <label className="mb-1 block text-sm font-medium">投稿タイプ</label>
+                        <select
+                            value={postType}
+                            onChange={e => setPostType(e.target.value as 'blog' | 'page')}
+                            className="w-full rounded-md border px-3 py-2"
+                        >
+                            <option value="blog">ブログ記事</option>
+                            <option value="page">固定ページ</option>
+                        </select>
+                    </div>
+
+                    {postType === 'page' && (
+                        <div>
+                            <label className="mb-1 block text-sm font-medium">表示順</label>
+                            <input
+                                type="number"
+                                value={displayOrder}
+                                onChange={e => setDisplayOrder(Number(e.target.value))}
+                                className="w-full rounded-md border px-3 py-2"
+                                min={0}
+                            />
+                        </div>
+                    )}
 
                     <label className="flex items-center gap-2 text-sm">
                         <input

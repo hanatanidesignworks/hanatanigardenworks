@@ -14,6 +14,8 @@ type Editable = {
     tags: string[];
     content_md: string;
     published: boolean;
+    post_type: 'blog' | 'page';
+    display_order: number;
 }
 
 export default function EditPage() {
@@ -35,6 +37,8 @@ export default function EditPage() {
         tags: [],
         content_md: "",
         published: true,
+        post_type: 'blog',
+        display_order: 0,
     });
 
     useEffect(() => {
@@ -54,7 +58,7 @@ export default function EditPage() {
             setLoadingDoc(true);
             const { data, error } = await supabase
                 .from('articles')
-                .select('id, title, slug, excerpt, cover_url, tags, content_md, published')
+                .select('id, title, slug, excerpt, cover_url, tags, content_md, published, post_type, display_order')
                 .eq('slug', slug)
                 .maybeSingle();
 
@@ -79,6 +83,8 @@ export default function EditPage() {
                     tags: data.tags || [],
                     content_md: data.content_md || "",
                     published: data.published,
+                    post_type: data.post_type ?? 'blog',
+                    display_order: data.display_order ?? 0,
                 });
             }
             setLoadingDoc(false);
@@ -98,6 +104,8 @@ export default function EditPage() {
                 tags: form.tags,
                 content_md: form.content_md,
                 published: form.published,
+                post_type: form.post_type,
+                display_order: form.post_type === 'page' ? form.display_order : 0,
             })
             .eq('id', articleId)
             .select('id');
@@ -206,6 +214,31 @@ export default function EditPage() {
                         placeholder="ここにMarkdown形式で本文を入力..."
                     ></textarea>
                 </div>
+
+                <div>
+                    <label className="mb-1 block text-sm font-medium">投稿タイプ</label>
+                    <select
+                        value={form.post_type}
+                        onChange={(e) => setForm({ ...form, post_type: e.target.value as 'blog' | 'page' })}
+                        className="w-full rounded-md border px-3 py-2"
+                    >
+                        <option value="blog">ブログ記事</option>
+                        <option value="page">固定ページ</option>
+                    </select>
+                </div>
+
+                {form.post_type === 'page' && (
+                    <div>
+                        <label className="mb-1 block text-sm font-medium">表示順</label>
+                        <input
+                            type="number"
+                            value={form.display_order}
+                            onChange={(e) => setForm({ ...form, display_order: Number(e.target.value) })}
+                            className="w-full rounded-md border px-3 py-2"
+                            min={0}
+                        />
+                    </div>
+                )}
 
                 <label className="flex items-center gap-2 text-sm">
                     <input

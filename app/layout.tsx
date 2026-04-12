@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.hanatanigardenworks.com'),
   title: "八尾市の庭木剪定・伐採・草刈り｜写真見積りOK｜ハナタニガーデンワークス",
   description: "八尾市の庭師。シンボルツリー剪定・伐採・草刈り。LINE・DMで写真送るだけ見積りOK。Before→After多数、最短即日対応のハナタニガーデンワークス。",
   keywords: [
@@ -19,13 +20,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ハナタニガーデンワークス｜八尾市の庭木剪定・伐採・草刈り",
     description: "八尾市を中心に庭木剪定・伐採・草刈りを行うハナタニガーデンワークス。写真を送るだけ見積もりOK。シンボルツリーのお手入れもお任せください。",
-    url: "https://hanatanigardenworks.com",
+    url: "https://www.hanatanigardenworks.com",
     siteName: "ハナタニガーデンワークス",
     locale: "ja_JP",
     type: "website",
   },
   alternates: {
-    canonical: "https://hanatanigardenworks.com",
+    canonical: "https://www.hanatanigardenworks.com",
   },
 };
 
