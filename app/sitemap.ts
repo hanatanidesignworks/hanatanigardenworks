@@ -1,13 +1,15 @@
-import { supabase } from '@/lib/supabaseClient'
+import { createSupabaseServerClient } from '@/lib/supabaseServer'
 import type { MetadataRoute } from 'next'
 
 const siteUrl = 'https://www.hanatanigardenworks.com'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const supabase = await createSupabaseServerClient()
   const { data: articles } = await supabase
     .from('articles')
     .select('slug, updated_at')
     .eq('published', true)
+    .eq('post_type', 'blog')
     .order('updated_at', { ascending: false })
 
   const posts: MetadataRoute.Sitemap = (articles ?? []).map((a) => ({

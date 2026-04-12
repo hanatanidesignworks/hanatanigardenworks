@@ -13,6 +13,7 @@ export async function GET() {
         .from('articles')
         .select('title, slug, excerpt, content_md, created_at')
         .eq('published', true)
+        .eq('post_type', 'blog')
         .order('created_at', { ascending: false })
         .limit(20)
 

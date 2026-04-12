@@ -10,6 +10,7 @@ type MiniPost = {
     slug: string;
     published: boolean;
     updated_at: string;
+    post_type: string;
 }
 
 export default function AdminPage() {
@@ -41,7 +42,7 @@ export default function AdminPage() {
         setListLoading(true);
         const { data, error } = await supabase
             .from('articles')
-            .select('id, title, slug, published, updated_at')
+            .select('id, title, slug, published, updated_at, post_type')
             .order('updated_at', { ascending: false })
             .limit(50);
 
@@ -86,11 +87,16 @@ export default function AdminPage() {
                         <li key={p.id} className="flex items-center justify-between gap-4 ps-4 py-3">
                             <div className="min-w-0">
                                 <p className="truncate font-medium">{p.title}</p>
-                                <p className="mt-0.5 text-xs text-gray-500">
+                                <p className="mt-0.5 flex flex-wrap items-center gap-1 text-xs text-gray-500">
                                     /posts/{p.slug}
                                     {!p.published && (
-                                        <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] text-amber-700">
+                                        <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] text-amber-700">
                                             Draft
+                                        </span>
+                                    )}
+                                    {p.post_type === 'page' && (
+                                        <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-700">
+                                            固定ページ
                                         </span>
                                     )}
                                 </p>
