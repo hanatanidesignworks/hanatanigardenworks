@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -45,6 +46,16 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Hachi+Maru+Pop&family=Kaisei+Decol:wght@400;700&family=M+PLUS+1:wght@100..900&family=M+PLUS+Rounded+1c&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&family=Shippori+Mincho&family=Zen+Maru+Gothic&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-screen flex flex-col">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-QE0PPVVGMD"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-QE0PPVVGMD');
+        `}</Script>
         {children}
       </body>
     </html>
