@@ -34,7 +34,7 @@ export default async function Home() {
   return (
     <main>
       <Header />
-      <FirstView />
+      <FirstView latestPost={blogPosts?.[0] ?? null} />
       <PageCards pages={pages ?? []} />
       <section className="mx-auto max-w-[768px] px-4">
         <h2 className="mb-2 text-lg font-semibold text-gray-700">最新の投稿</h2>

@@ -1,6 +1,16 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
-export default function FirstView() {
+type LatestPost = {
+  slug: string
+  title: string
+}
+
+type Props = {
+  latestPost?: LatestPost | null
+}
+
+export default function FirstView({ latestPost }: Props) {
   return (
     <div className="relative w-full" style={{ height: '70vh' }}>
       {/* 背景画像 */}
@@ -50,6 +60,27 @@ export default function FirstView() {
           サービスを見る →
         </a>
       </div>
+
+      {/* 最新記事バナー */}
+      {latestPost && (
+        <div
+          className="absolute bottom-0 left-0 right-0"
+          style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
+        >
+          <Link
+            href={`/posts/${latestPost.slug}`}
+            className="mx-auto flex max-w-[768px] items-center gap-3 px-4 py-3 text-white transition hover:brightness-110"
+          >
+            <span className="shrink-0 rounded border border-emerald-400 px-2 py-0.5 text-xs font-medium text-emerald-300">
+              最新記事
+            </span>
+            <span className="min-w-0 flex-1 truncate text-sm">
+              {latestPost.title}
+            </span>
+            <span className="shrink-0 text-sm text-gray-300">→</span>
+          </Link>
+        </div>
+      )}
     </div>
   )
 }
