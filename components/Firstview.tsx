@@ -1,6 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+// 新着情報テキスト（変更する際はここを編集）
+const NEWS_TEXT = 'お問い合わせフォームの不具合を修正しました'
+const NEWS_DATE = '2026.04.18'
+
 type LatestPost = {
   slug: string
   title: string
@@ -61,12 +65,27 @@ export default function FirstView({ latestPost }: Props) {
         </a>
       </div>
 
-      {/* 最新記事バナー */}
-      {latestPost && (
-        <div
-          className="absolute bottom-0 left-0 right-0"
-          style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
-        >
+      {/* バナー（新着情報 + 最新記事） */}
+      <div
+        className="absolute bottom-0 left-0 right-0"
+        style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
+      >
+        {/* 1行目：新着情報 */}
+        <div className="mx-auto flex max-w-[768px] items-center gap-3 px-4 py-3 text-white">
+          <span className="shrink-0 rounded bg-red-600 px-2 py-0.5 text-xs font-medium text-white">
+            新着情報
+          </span>
+          <span className="min-w-0 flex-1 truncate text-sm">
+            {NEWS_TEXT}
+          </span>
+          <span className="shrink-0 text-xs text-gray-400">{NEWS_DATE}</span>
+        </div>
+
+        {/* 区切り線 */}
+        <div className="mx-auto max-w-[768px] border-t border-white/10" />
+
+        {/* 2行目：最新記事 */}
+        {latestPost && (
           <Link
             href={`/posts/${latestPost.slug}`}
             className="mx-auto flex max-w-[768px] items-center gap-3 px-4 py-3 text-white transition hover:brightness-110"
@@ -79,8 +98,8 @@ export default function FirstView({ latestPost }: Props) {
             </span>
             <span className="shrink-0 text-sm text-gray-300">→</span>
           </Link>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
