@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 
 const nameJaRegex =  /^[ぁ-んァ-ン一-龥　]+$/;
@@ -21,6 +21,7 @@ export default function ContactForm(){
     const [submitting, setSubmitting] = useState(false);
     const [message, setMessage] = useState('');
     const [err, setErr] = useState<string | null>(null);
+    const composingRef = useRef(false); // IME変換中フラグ
     const email = useMemo(() => normalizeEmail(emailRaw), [emailRaw]);
 
     const nameOk = name.trim() !== '' && nameJaRegex.test(name.trim());
@@ -81,10 +82,22 @@ export default function ContactForm(){
                 <input
                     type="text"
                     value={name}
+                    onCompositionStart={() => { composingRef.current = true; }}
+                    onCompositionEnd={(e) => {
+                        composingRef.current = false;
+                        const value = (e.target as HTMLInputElement).value;
+                        setName(value);
+                        if (value === '' || nameJaRegex.test(value)) {
+                            setErr('');
+                        } else {
+                            setErr('日本語（ひらがな・カタカナ・漢字）のみ入力できます。');
+                        }
+                    }}
                     onChange={(e) => {
                         const value = e.target.value;
+                        setName(value); // 常にstateを更新してcontrolled inputを維持
+                        if (composingRef.current) return; // 変換中はバリデーションしない
                         if (value === '' || nameJaRegex.test(value)) {
-                            setName(value);
                             setErr('');
                         } else {
                             setErr('日本語（ひらがな・カタカナ・漢字）のみ入力できます。');
