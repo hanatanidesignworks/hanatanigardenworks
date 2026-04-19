@@ -60,6 +60,13 @@ export default function ContactForm(){
             console.error(error);
             setMessage('送信に失敗しました。もう一度お試しください。');
         } else {
+            // Supabase保存成功後にメール通知（失敗してもユーザー体験は損なわない）
+            fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: trimmedName, email, comment: comment.trim() }),
+            }).catch((e) => console.error('メール送信エラー:', e));
+
             setMessage('送信が完了しました！');
             setName('');
             setEmailRaw('');
