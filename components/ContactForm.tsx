@@ -148,9 +148,10 @@ export default function ContactForm(){
                 disabled={!allOk}
                 className={`w-full py-2 rounded-md text-white font-semibold transition ${
                     allOk
-                        ? 'bg-blue-600 hover:bg-blue-700'
+                        ? 'hover:opacity-80'
                         : 'bg-gray-400 cursor-not-allowed'
                 }`}
+                style={allOk ? { backgroundColor: '#2D5016' } : {}}
             >
                 {submitting ? '送信中...' : '送信'}
             </button>

@@ -12,7 +12,7 @@ export default function PageCards({ pages }: { pages: PageCard[] }) {
   if (pages.length === 0) return null
 
   return (
-    <section className="mx-auto max-w-[768px] px-4 py-8">
+    <section className="mx-auto max-w-4xl px-4 py-8">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {pages.map((page) => (
           <Link
