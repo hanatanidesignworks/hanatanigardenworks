@@ -71,7 +71,7 @@ export default function FirstView({ latestPost }: Props) {
         style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
       >
         {/* 1行目：新着情報 */}
-        <div className="mx-auto flex max-w-[768px] items-center gap-3 px-4 py-3 text-white">
+        <div className="mx-auto flex max-w-4xl items-center gap-3 px-4 py-3 text-white">
           <span className="shrink-0 rounded bg-red-600 px-2 py-0.5 text-xs font-medium text-white">
             新着情報
           </span>
@@ -82,13 +82,13 @@ export default function FirstView({ latestPost }: Props) {
         </div>
 
         {/* 区切り線 */}
-        <div className="mx-auto max-w-[768px] border-t border-white/10" />
+        <div className="mx-auto max-w-4xl border-t border-white/10" />
 
         {/* 2行目：最新記事 */}
         {latestPost && (
           <Link
             href={`/posts/${latestPost.slug}`}
-            className="mx-auto flex max-w-[768px] items-center gap-3 px-4 py-3 text-white transition hover:brightness-110"
+            className="mx-auto flex max-w-4xl items-center gap-3 px-4 py-3 text-white transition hover:brightness-110"
           >
             <span className="shrink-0 rounded border border-emerald-400 px-2 py-0.5 text-xs font-medium text-emerald-300">
               最新記事

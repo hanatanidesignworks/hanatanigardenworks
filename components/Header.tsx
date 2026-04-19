@@ -50,7 +50,7 @@ export default function Header(){
 
     return(
         <header className="w-full h-[50px] bg-gray-100 flex items-center justify-center">
-            <div className="flex w-full md:w-[768px] h-[40px] justify-between items-center">
+            <div className="flex w-full md:max-w-4xl h-[40px] justify-between items-center px-4">
                 <div className="w-[240px] h-[30px]">
                     <p className="ml-[10px] text-base" style={{fontFamily:  "Noto Sans JP"}}>
                         Hanatani Garden Works

@@ -17,7 +17,7 @@ type ArticleCard = {
 export default function Hero({ posts }: { posts: ArticleCard[] }) {
 
     return (
-        <section className='grid grid-cols-1 sm:grid-cols-2 gap-1 max-w-[768px] mx-auto'>
+        <section className='grid grid-cols-1 sm:grid-cols-2 gap-1 max-w-4xl mx-auto'>
             {posts?.map((post, i) => 
             <motion.article
                  key={post.id}
@@ -32,7 +32,7 @@ export default function Hero({ posts }: { posts: ArticleCard[] }) {
                     }
                  }}
                  transition={{ duration: 0.35, delay: i * 0.2 }} 
-                 className='flex flex-row gap-2 max-w-sm w-[350px] md:w-[370px] bg-white rounded-xl shadow-md overflow-hidden mt-4 p-4 hover:bg-gray-100'
+                 className='flex flex-row gap-2 w-full bg-white rounded-xl shadow-md overflow-hidden mt-4 p-4 hover:bg-gray-100'
             >
                 <div className='w-[50px] h-[50px] aspect-[1/1]'>
                     <img

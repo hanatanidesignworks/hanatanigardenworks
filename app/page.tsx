@@ -4,7 +4,7 @@ import Hero from '@/components/Hero';
 import PageCards from '@/components/PageCards';
 import { supabase } from '@/lib/supabaseClient';
 import Footer from '@/components/Footer';
-import ContactForm from '@/components/ContactForm';
+import ContactSection from '@/components/ContactSection';
 import Link from 'next/link';
 
 export const revalidate = 30;
@@ -36,7 +36,7 @@ export default async function Home() {
       <Header />
       <FirstView latestPost={blogPosts?.[0] ?? null} />
       <PageCards pages={pages ?? []} />
-      <section className="mx-auto max-w-[768px] px-4">
+      <section className="mx-auto max-w-4xl px-4">
         <h2 className="mb-2 text-lg font-semibold text-gray-700">最新の投稿</h2>
         <Hero posts={blogPosts ?? []} />
         <div className="mt-8 text-center">
@@ -48,7 +48,7 @@ export default async function Home() {
           </Link>
         </div>
       </section>
-      <ContactForm />
+      <ContactSection />
       <Footer />
     </main>
   );
