@@ -40,9 +40,10 @@ export async function generateMetadata({ params, }: { params: Promise<{ slug: st
 
     const siteUrl = 'https://www.hanatanigardenworks.com';
     const postUrl = `${siteUrl}/posts/${encodeURIComponent(slug)}`;
+    const defaultImageUrl = `${siteUrl}/hero.png`;
     const imageUrl = data?.cover_url
       ? new URL(data.cover_url, siteUrl).toString()
-      : undefined;
+      : defaultImageUrl;
 
     return {
         title: data?.title ?? '記事',
@@ -52,22 +53,20 @@ export async function generateMetadata({ params, }: { params: Promise<{ slug: st
             description: data?.excerpt?.trim() ?? 'ブログ記事',
             url: postUrl,
             type: 'article',
-            images: imageUrl
-              ? [
-                  {
-                    url: imageUrl,
-                    width: 1200,
-                    height: 630,
-                    alt: data?.title ?? '記事のカバー画像',
-                  },
-                ]
-              : undefined,
+            images: [
+              {
+                url: imageUrl,
+                width: 1200,
+                height: 630,
+                alt: data?.title ?? '記事のカバー画像',
+              },
+            ],
         },
         twitter: {
-            card: imageUrl ? 'summary_large_image' : 'summary',
+            card: 'summary_large_image',
             title: data?.title ?? '記事',
             description: data?.excerpt?.trim() ?? 'ブログ記事',
-            images: imageUrl ? [imageUrl] : undefined,
+            images: [imageUrl],
         },
         alternates: {
             canonical: postUrl,
