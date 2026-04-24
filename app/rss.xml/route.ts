@@ -11,7 +11,7 @@ export async function GET() {
 
     const { data: articles, error } = await supabase
         .from('articles')
-        .select('title, slug, excerpt, content_md, created_at')
+        .select('title, slug, excerpt, content_md, cover_url, created_at')
         .eq('published', true)
         .eq('post_type', 'blog')
         .order('created_at', { ascending: false })
@@ -32,6 +32,9 @@ export async function GET() {
 
             const pubDate = a.created_at ? new Date(a.created_at).toUTCString() : now;
 
+            const defaultImage = 'https://www.hanatanigardenworks.com/hero.png';
+            const imageUrl = a.cover_url?.trim() || defaultImage;
+
             return `
         <item>
             <title><![CDATA[${a.title}]]></title>
@@ -39,13 +42,15 @@ export async function GET() {
             <guid isPermaLink="true">${link}</guid>
             <pubDate>${pubDate}</pubDate>
             <description><![CDATA[${desc}]]></description>
+            <media:content url="${imageUrl}" medium="image" />
+            <enclosure url="${imageUrl}" type="image/jpeg" length="0" />
         </item>
             `
         })
         .join('');
 
     const xml = `<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
         <title>庭師、仕事を取りに行く。</title>
         <link>${siteUrl}</link>
