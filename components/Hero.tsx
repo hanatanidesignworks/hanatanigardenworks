@@ -41,12 +41,15 @@ export default function Hero({ posts }: { posts: ArticleCard[] }) {
                         className='w-[50px] h-[50px] object-cover'
                     />
                 </div>
-                <div>
+                <div className='flex-1 min-w-0'>
                     <h2 className='text-lg font-bold text-gray-600'>
                     <Link href={`/posts/${encodeURIComponent(post.slug)}`}> {post.title}</Link>
                     </h2>
                     <p className='text-sm mt-2 text-blue-900'>
                         {post.excerpt ? post.excerpt.slice(0, 50) + (post.excerpt.length > 50 ? "..." : "") : ""}
+                    </p>
+                    <p className='text-sm mt-1 text-gray-400 text-right'>
+                        {new Date(post.created_at).toLocaleDateString('ja-JP')}
                     </p>
                 </div>
             </motion.article>

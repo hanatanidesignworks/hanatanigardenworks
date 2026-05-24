@@ -49,6 +49,9 @@ export default async function TagPage({ params }: { params: Promise<{ tag: strin
                             <p className='text-sm text-gray-600 line-clamp-3 mt-1'>
                                 {a.excerpt}
                             </p>
+                            <p className='text-sm text-gray-400 text-right mt-1'>
+                                {new Date(a.created_at).toLocaleDateString('ja-JP')}
+                            </p>
                             <div className='flex flex-wrap gap-2 mt-3'>
                                 {a.tags?.map((t: string) => (
                                     <Link
