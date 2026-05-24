@@ -8,6 +8,7 @@ const NEWS_DATE = '2026.05.24'
 type LatestPost = {
   slug: string
   title: string
+  created_at?: string
 }
 
 type Props = {
@@ -93,6 +94,11 @@ export default function FirstView({ latestPost }: Props) {
             <span className="shrink-0 rounded border border-emerald-400 px-2 py-0.5 text-xs font-medium text-emerald-300">
               最新記事
             </span>
+            {latestPost.created_at && (
+              <span className="shrink-0 text-xs text-gray-400">
+                {new Date(latestPost.created_at).toLocaleDateString('ja-JP')}
+              </span>
+            )}
             <span className="min-w-0 flex-1 truncate text-sm">
               {latestPost.title}
             </span>
