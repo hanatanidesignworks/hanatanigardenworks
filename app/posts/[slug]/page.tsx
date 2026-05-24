@@ -142,23 +142,19 @@ export default async function PostDetail({ params, }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* にほんブログ村バナー */}
+      {/* にほんブログ村PVポイントランキングバナー */}
       <div className="mx-auto mt-6 max-w-3xl px-4">
         <a
-          href="https://flower.blogmura.com/ranking/in?p_cid=11210959"
+          href="https://blogmura.com/profiles/11210959?p_cid=11210959"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-gray-600"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://b.blogmura.com/flower/88_31.gif"
-            width="88"
-            height="31"
-            alt="にほんブログ村 花・園芸ブログへ"
+            src="https://blogparts.blogmura.com/parts_image/user/pv11210959.gif"
+            alt="PVアクセスランキング にほんブログ村"
             style={{ border: 0 }}
           />
-          <span>にほんブログ村</span>
         </a>
       </div>
 
