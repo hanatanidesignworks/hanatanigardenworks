@@ -181,7 +181,7 @@ export default function NewPostPage() {
                             value={slug}
                             onChange={(e) => handleSlugChange(e.target.value)}
                             className="w-full rounded-md border px-3 py-2"
-                            placeholder="first-article または 日本語スラッグ"
+                            placeholder="英数字・ハイフンで入力（例: rainy-season-garden-tips）"
                             required
                         />
                         <div className="mt-1 flex items-center gap-2 text-xs">

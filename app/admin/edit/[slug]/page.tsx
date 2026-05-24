@@ -95,10 +95,17 @@ export default function EditPage() {
         e.preventDefault();
         setErrorMsg(null);
 
+        const newSlug = form.slug.normalize('NFC').trim();
+        if (!newSlug) {
+            setErrorMsg('スラッグは必須です。');
+            return;
+        }
+
         const { data, error } = await supabase
             .from('articles')
             .update({
                 title: form.title,
+                slug: newSlug,
                 excerpt: form.excerpt,
                 cover_url: form.cover_url,
                 tags: form.tags,
@@ -119,7 +126,7 @@ export default function EditPage() {
             return;
         }
 
-        router.push(`/posts/${encodeURIComponent(slug)}`);
+        router.push(`/posts/${encodeURIComponent(newSlug)}`);
     };
 
     const handleDelete = async () => {
@@ -163,6 +170,21 @@ export default function EditPage() {
                         className="w-full rounded-md border px-3 py-2"
                         required
                     />
+                </div>
+
+                <div>
+                    <label className="mb-1 block text-sm font-medium">スラッグ</label>
+                    <input
+                        type="text"
+                        value={form.slug}
+                        onChange={(e) => setForm({ ...form, slug: e.target.value })}
+                        className="w-full rounded-md border px-3 py-2"
+                        placeholder="英数字・ハイフンで入力（例: rainy-season-garden-tips）"
+                        required
+                    />
+                    <p className="mt-1 text-xs text-amber-600">
+                        変更すると記事URLが変わります。英数字・ハイフンのみ推奨。
+                    </p>
                 </div>
 
                 <div>
