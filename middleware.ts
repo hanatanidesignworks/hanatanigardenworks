@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -25,9 +25,11 @@ export async function proxy(request: NextRequest) {
     }
   )
 
+  // 全ルートでセッションを更新する（外部サイトからの初回アクセスにも対応）
   const { data: { user } } = await supabase.auth.getUser()
 
-  if (!user) {
+  // /admin/* は認証必須
+  if (request.nextUrl.pathname.startsWith('/admin') && !user) {
     const loginUrl = new URL('/login', request.url)
     return NextResponse.redirect(loginUrl)
   }
@@ -36,5 +38,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
 }
