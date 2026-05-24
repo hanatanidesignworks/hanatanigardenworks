@@ -2,8 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 // 新着情報テキスト（変更する際はここを編集）
-const NEWS_TEXT = 'お問い合わせフォームの不具合を修正しました'
-const NEWS_DATE = '2026.04.18'
+const NEWS_TEXT = 'にほんブログ村のPVポイントランキングに参加しました'
+const NEWS_DATE = '2026.05.24'
 
 type LatestPost = {
   slug: string
