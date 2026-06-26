@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      { source: '/:path*', has: [{ type: 'host', value: 'hanatanigardenworks.com' }], destination: 'https://www.hanatanigardenworks.com/:path*', permanent: true },
       { source: '/posts/なぜ庭師仕事を取りに行くというブログを書くのか', destination: '/posts/post-12', permanent: true },
       { source: '/posts/ヴィジョンを決めたら行動に迷わなくなった', destination: '/posts/post-14', permanent: true },
       { source: '/posts/庭師仕事を取りに行くをどこで公開するか考えた', destination: '/posts/post-15', permanent: true },

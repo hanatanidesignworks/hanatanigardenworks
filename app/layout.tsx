@@ -4,7 +4,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.hanatanigardenworks.com'),
-  title: "八尾市の庭木剪定・伐採・草刈り｜写真見積りOK｜ハナタニガーデンワークス",
+  title: {
+    default: "八尾市の庭木剪定・伐採・草刈り｜写真見積りOK｜ハナタニガーデンワークス",
+    template: "%s | ハナタニガーデンワークス",
+  },
   description: "八尾市の庭師。シンボルツリー剪定・伐採・草刈り。LINE・DMで写真送るだけ見積りOK。Before→After多数、最短即日対応のハナタニガーデンワークス。",
   keywords: [
     "八尾市",
